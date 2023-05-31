@@ -12,7 +12,7 @@ import os
 api_url = 'http://xxx.xxx.xxx.xxx:7860'
 
 #base_prompt = 'selfie of a $nationality_toggle $sex_toggle with realistic $skin_toggle skin $extras realistic $eye_color_toggle eyes with round iris and $hair_length_toggle $hair_type_toggle $hair_color_toggle hair looking at the camera, headshot, well illuminated, detailed background, realistic symmetrical eyes, round iris, natural light, realistic lips'
-base_prompt = 'outoor selfie of a $nationality_toggle $sex_toggle with natural textured $skin_toggle skin $extras detailed $eye_color_toggle eyes with round iris and $hair_length_toggle $hair_type_toggle $hair_color_toggle hair, well illuminated, detailed background, natural sun light'
+base_prompt = 'natural selfie of a $nationality_toggle $sex_toggle with natural textured $skin_toggle skin $extras detailed $eye_color_toggle eyes with round iris and $hair_length_toggle $hair_type_toggle $hair_color_toggle hair, well illuminated, headshot, detailed and sharp background, natural light'
 
 negative_prompt = "ugly, bad anatomy, deformed body, missing fingers, extra fingers, deformed face, cropped, cropped face, chibi, weird eyes, worst quality, low quality, watermark, text, multiple faces, two faces"
 
@@ -25,7 +25,7 @@ print(last)
 batch_size=8
 
 for index in range(1000):
-    print(index+1,"/",1000)
+    #print(index+1,"/",1000)
     prompt = base_prompt
     prompt = prompt.replace('$sex_toggle', random.choice(['man', 'woman', 'male', 'female']))
     prompt = prompt.replace('$hair_length_toggle', random.choice(['long', 'short', 'medium', 'extremely long']))
@@ -36,6 +36,9 @@ for index in range(1000):
     prompt = prompt.replace('$skin_toggle', random.choice(['pale', 'fair', 'olive', 'brown']))
     prompt = prompt.replace('$extras', random.choice(['']))
 
+    print(prompt)
+
+if False:
     payload = {
         "prompt":prompt,
         "negative_prompt":negative_prompt,
@@ -46,6 +49,7 @@ for index in range(1000):
         "cfg_scale":8,
         "batch_size":batch_size,
     }
+
 
     response = requests.post(url=f'{api_url}/sdapi/v1/txt2img', json=payload)
     #print(response)
