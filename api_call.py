@@ -11,12 +11,13 @@ import os
 
 api_url = 'http://127.0.0.1:7860'
 
+subset = 'urpm_simple_corrected'
 #base_prompt = 'selfie of a $nationality_toggle $sex_toggle with realistic $skin_toggle skin $extras realistic $eye_color_toggle eyes with round iris and $hair_length_toggle $hair_type_toggle $hair_color_toggle hair looking at the camera, headshot, well illuminated, detailed background, realistic symmetrical eyes, round iris, natural light, realistic lips'
 base_prompt = 'natural selfie of a $nationality_toggle $sex_toggle with natural textured $skin_toggle skin $extras detailed $eye_color_toggle eyes with round iris and $hair_length_toggle $hair_type_toggle $hair_color_toggle hair, well illuminated, headshot, detailed and sharp background, natural light'
 
-negative_prompt = "ugly, bad anatomy, deformed body, missing fingers, extra fingers, deformed face, cropped, cropped face, chibi, weird eyes, worst quality, low quality, watermark, text, multiple faces, two faces"
+negative_prompt = "child, childish, rendering, 3d rendering, naked, nude, porn, blurry, ugly, bad anatomy, deformed body, missing fingers, extra fingers, deformed face, cropped, cropped face, chibi, weird eyes, worst quality, low quality, watermark, text, multiple faces, two faces"
 
-if glob.glob('data/SD1.5/*.png'):
+if glob.glob('data/SD1.5/'+subset+'/*.png'):
     last = np.max([int(os.path.basename(name).split('.')[0].split('_')[-1]) for name in glob.glob('data/SD1.5/*.png')])
 else:
     last = 0
@@ -69,4 +70,4 @@ for index in range(1000):
 
         #pnginfo = PngImagePlugin.PngInfo()
         #pnginfo.add_text("parameters", response2.json().get("info"))
-        image.save('data/SD1.5/urpm_simple/output_'+str(last+(index*batch_size)+img_idx+1)+'.png')
+        image.save('data/SD1.5/'+subset+'/output_'+str(last+(index*batch_size)+img_idx+1)+'.png')
