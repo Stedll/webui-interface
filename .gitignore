@@ -3,3 +3,7 @@ data/
 *.jpg
 *.pt
 *.txt
+*.log
+*.tar.gz
+*.zip
+*.out

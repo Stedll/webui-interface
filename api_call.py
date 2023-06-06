@@ -9,7 +9,7 @@ import random
 import glob
 import os
 
-api_url = 'http://xxx.xxx.xxx.xxx:7860'
+api_url = 'http://127.0.0.1:7860'
 
 #base_prompt = 'selfie of a $nationality_toggle $sex_toggle with realistic $skin_toggle skin $extras realistic $eye_color_toggle eyes with round iris and $hair_length_toggle $hair_type_toggle $hair_color_toggle hair looking at the camera, headshot, well illuminated, detailed background, realistic symmetrical eyes, round iris, natural light, realistic lips'
 base_prompt = 'natural selfie of a $nationality_toggle $sex_toggle with natural textured $skin_toggle skin $extras detailed $eye_color_toggle eyes with round iris and $hair_length_toggle $hair_type_toggle $hair_color_toggle hair, well illuminated, headshot, detailed and sharp background, natural light'
@@ -25,7 +25,7 @@ print(last)
 batch_size=8
 
 for index in range(1000):
-    #print(index+1,"/",1000)
+    print(index+1,"/",1000)
     prompt = base_prompt
     prompt = prompt.replace('$sex_toggle', random.choice(['man', 'woman', 'male', 'female']))
     prompt = prompt.replace('$hair_length_toggle', random.choice(['long', 'short', 'medium', 'extremely long']))
@@ -36,9 +36,6 @@ for index in range(1000):
     prompt = prompt.replace('$skin_toggle', random.choice(['pale', 'fair', 'olive', 'brown']))
     prompt = prompt.replace('$extras', random.choice(['']))
 
-    print(prompt)
-
-if False:
     payload = {
         "prompt":prompt,
         "negative_prompt":negative_prompt,
@@ -49,7 +46,6 @@ if False:
         "cfg_scale":8,
         "batch_size":batch_size,
     }
-
 
     response = requests.post(url=f'{api_url}/sdapi/v1/txt2img', json=payload)
     #print(response)
@@ -73,4 +69,4 @@ if False:
 
         #pnginfo = PngImagePlugin.PngInfo()
         #pnginfo.add_text("parameters", response2.json().get("info"))
-        image.save('data/SD1.5/output_'+str(last+(index*batch_size)+img_idx+1)+'.png')
+        image.save('data/SD1.5/urpm_simple/output_'+str(last+(index*batch_size)+img_idx+1)+'.png')
