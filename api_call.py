@@ -18,7 +18,7 @@ base_prompt = 'natural selfie of a $nationality_toggle $sex_toggle with natural 
 negative_prompt = "child, childish, rendering, 3d rendering, naked, nude, porn, blurry, ugly, bad anatomy, deformed body, missing fingers, extra fingers, deformed face, cropped, cropped face, chibi, weird eyes, worst quality, low quality, watermark, text, multiple faces, two faces"
 
 if glob.glob('data/SD1.5/'+subset+'/*.png'):
-    last = np.max([int(os.path.basename(name).split('.')[0].split('_')[-1]) for name in glob.glob('data/SD1.5/*.png')])
+    last = np.max([int(os.path.basename(name).split('.')[0].split('_')[-1]) for name in glob.glob('data/SD1.5/'+subset+'/*.png')])
 else:
     last = 0
 

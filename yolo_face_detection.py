@@ -6,8 +6,10 @@ import cv2
 
 model = YOLO('yolov8n-face.pt')
 with open("SD1.5_bad.txt", "w") as f:
-    images = glob.glob("data/SD1.5/*.png")
-    for image in np.array_split(np.asarray(images), np.rint(len(images)/100)):
+    images = glob.glob("../data/TrueFaceSD/TrueFace_PreSocial/Fake/SD_1.5_simple/*.png")
+    split = np.array_split(np.asarray(images), np.rint(len(images)/800))
+    for index, image in enumerate(split):
+        print(index, "/", len(split))
         # Perform object detection on an image using the model
         results = model.predict(list(image), verbose=False)
         for i, result in enumerate(results):
